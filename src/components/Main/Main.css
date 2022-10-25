@@ -2,6 +2,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
     box-sizing: border-box;
 }
 
@@ -9,10 +10,13 @@
     height: 50px;
     background-color: transparent;
     border-bottom: 1px solid #000;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .main__section-heading-text {
     font-weight: normal;
     font-size: 22px;
     line-height: 1.2;
+    margin: auto 0 23px;
 }
