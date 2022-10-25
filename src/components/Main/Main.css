@@ -1,0 +1,18 @@
+.main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.main__section-heading-area {
+    height: 50px;
+    background-color: transparent;
+    border-bottom: 1px solid #000;
+}
+
+.main__section-heading-text {
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 1.2;
+}

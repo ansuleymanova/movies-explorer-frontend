@@ -1,0 +1,46 @@
+.header {
+    height: 74px;
+    width: 100%;
+    max-width: 1280px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 70px;
+    box-sizing: border-box;
+}
+
+.header__link {
+    height: 38px;
+    cursor: pointer;
+}
+
+.header__logo {
+    height: 38px;
+    width: 38px;
+}
+.header__authorization {
+    margin: 0;
+    padding: 0;
+}
+
+.header__button {
+    padding: 8px 20px;
+    width: fit-content;
+    border: none;
+    border-radius: 3px;
+    background-color: transparent;
+    font-size: 12px;
+    line-height: 1.3;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 0 10px 0 0;
+}
+
+.header__button_colored {
+    background-color: #2be080;
+}
+
+.header__button:last-child {
+    margin-right: 0;
+}
