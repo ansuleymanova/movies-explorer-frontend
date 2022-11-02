@@ -1,0 +1,23 @@
+.movie-list {
+    max-width: 1280px;
+    width: 100%;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding-top: 156px;
+}
+
+@media screen and (max-width: 768px) {
+    .movie-list {
+        grid-template-columns: repeat(2, 1fr);
+        padding-top: 70px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .movie-list {
+        grid-template-columns: repeat(1, 1fr);
+        padding-top: 40px;
+    }
+}

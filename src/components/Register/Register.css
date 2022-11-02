@@ -1,0 +1,113 @@
+.register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 396px;
+}
+
+.register__main-link {
+    width: 100%;
+    height: 38px;
+    cursor: pointer;
+}
+
+.login__logo {
+    height: 38px;
+    width: 38px;
+}
+
+.register__title {
+    color: #000;
+    margin: 40px auto;
+    width: 100%;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 29px;
+}
+
+.register__container {
+    width: 100%;
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.register__label {
+    color: #a0a0a0;
+    font-size: 10px;
+    line-height: 1.2;
+    padding-bottom: 5px;
+}
+
+.register__field {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 44px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.register__field:last-child {
+    margin-bottom: 0;
+}
+
+.register__input {
+    border: none;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.register__input:invalid {
+    color: #ee3465;
+}
+
+.register__save-button {
+    width: 100%;
+    height: 45px;
+    border: none;
+    background-color: #2be080;
+    border-radius: 3px;
+    color: #fff;
+    margin-top: 152px;
+}
+
+.register__caption {
+    color: #a0a0a0;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 16px;
+}
+
+.register__link {
+    color: #2be080;
+    line-height: 1.15;
+    font-size: 14px;
+    text-align: center;
+    padding: 0;
+    text-decoration: none;
+    transition: opacity .5s ease-out;
+    cursor: pointer;
+}
+
+.register__link:hover {
+    opacity: .6;
+}
+
+@media screen and (max-width: 500px) {
+    .register {
+        width: calc(100% - 60px);
+    }
+
+    .register__main-link {
+        display: flex;
+        justify-content: center;
+    }
+}

@@ -62,3 +62,48 @@
     color: #000;
     cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+    .techs__text {
+        font-size: 12px;
+        line-height: 18px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .techs {
+        background-color: #fff;
+        padding: 60px 0 78px;
+    }
+
+    .techs__content {
+        padding: 0 18px;
+    }
+
+    .techs__heading {
+        font-size: 30px;
+        line-height: 36px;
+        margin-top: 60px;
+    }
+
+    .techs__text {
+        font-size: 11px;
+        line-height: 16px;
+        margin-bottom: 50px;
+    }
+
+    .techs__list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: fit-content;
+        gap: 10px;
+    }
+
+    .techs__tech {
+        width: 84px;
+        height: 57px;
+        font-size: 12px;
+        line-height: 14.5px;
+        margin: 0;
+    }
+}

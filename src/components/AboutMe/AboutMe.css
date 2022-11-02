@@ -47,7 +47,7 @@
 
 .about-me__picture {
     height: 327px;
-    width: 270px;
+    min-width: 270px;
     background-image: url("../../images/me.jpg");
     background-size: cover;
     border-radius: 10px;
@@ -78,4 +78,64 @@
 
 .about-me__link:hover {
     opacity: 0.7;
+}
+
+@media screen and (max-width: 768px) {
+    .about-me {
+        padding: 90px 50px 90px;
+    }
+
+    .about-me__info {
+        max-width: 50%;
+    }
+
+    .about-me__name {
+        font-size: 40px;
+        line-height: 1;
+    }
+
+    .about-me__bio {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .about-me__addition {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .about-me__picture {
+        height: 307px;
+        min-width: 255px;
+    }
+
+    .about-me__link {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .about-me {
+        padding: 60px 14px 72px;
+    }
+
+    .about-me__profile {
+        flex-direction: column-reverse;
+        margin-top: 60px;
+    }
+
+    .about-me__picture {
+        max-height: 352px;
+        width: 100%;
+        min-width: 150px;
+        margin-bottom: 40px;
+    }
+    .about-me__info {
+        max-width: 100%;
+    }
+
+    .about-me__links {
+        bottom: -50px;
+    }
 }

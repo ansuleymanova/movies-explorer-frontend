@@ -20,3 +20,32 @@
     margin: 160px 0 151px;
     text-align: center;
 }
+
+@media screen and (max-width: 768px) and (min-width: 321px) {
+    .promo {
+        height: 834px;
+        width: calc(100% - 40px);
+    }
+
+    .promo__heading {
+        font-size: 40px;
+        line-height: 52px;
+        max-width: 680px;
+        margin: 350px 0 314px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .promo {
+        height: 586px;
+        width: calc(100% - 28px);
+        margin: 14px auto 0;
+    }
+
+    .promo__heading {
+        font-size: 29px;
+        line-height: 37px;
+        max-width: 292px;
+        margin: 220px 0 212px;
+    }
+}

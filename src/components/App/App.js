@@ -8,22 +8,26 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
+import NotFound from "../NotFound/NotFound";
 
 function App() {
   return (
       <BrowserRouter>
-        <div className="App">
-            <Header />
-            <Routes>
-                <Route path='/' element={<Main />}/>
-                {/*<Route path='/movies' element={<Movies />}/>*/}
-                {/*<Route path='/saved-movies' element={<SavedMovies />}/>*/}
-                {/*<Route path='/signup' element={<Register />}/>*/}
-                {/*<Route path='/signin' element={<Login />}/>*/}
-                {/*<Route path='/profile' element={<Profile />}/>*/}
-            </Routes>
-            <Footer />
-        </div>
+          <div className="page">
+              <div className="App">
+                  <Header />
+                  <Routes>
+                      <Route path='/' element={<Main />}/>
+                      <Route path='/movies' element={<Movies />}/>
+                      <Route path='/saved-movies' element={<SavedMovies />}/>
+                      <Route path='/signup' element={<Register />}/>
+                      <Route path='/signin' element={<Login />}/>
+                      <Route path='/profile' element={<Profile name="Анна" email="suleymanova@hse.ru"/>}/>
+                      <Route path='/not-found' element={<NotFound />}/>
+                  </Routes>
+              </div>
+              <Footer />
+          </div>
       </BrowserRouter>
   );
 }
