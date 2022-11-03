@@ -11,8 +11,8 @@ export default function SearchForm () {
                 </div>
                 <div className="search-form__options">
                     <label className="search-form__toggle">
-                        <input type="checkbox" />
-                        <i></i>
+                        <input type="checkbox" className="search-form__checkbox"/>
+                        <div className="search-form__pseudo"></div>
                     </label>
                     <p className="search-form__text">Короткометражки</p>
                 </div>
