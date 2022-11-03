@@ -115,3 +115,9 @@
         justify-content: center;
     }
 }
+
+@media screen and (max-width: 320px) {
+    .login__title {
+        text-align: center;
+    }
+}

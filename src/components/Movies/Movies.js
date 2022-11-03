@@ -5,9 +5,9 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
 export default function Movies (props) {
     return (
-        <div className="movies">
+        <main className="movies">
             <SearchForm />
             <MoviesCardList cards={cards}/>
-        </div>
+        </main>
     )
 }

@@ -111,3 +111,9 @@
         justify-content: center;
     }
 }
+
+@media screen and (max-width: 320px) {
+    .register__title {
+        text-align: center;
+    }
+}

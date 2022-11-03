@@ -2,12 +2,8 @@ import './Profile.css';
 
 export default function Profile (props) {
 
-    function handleSubmit(e) {
-        e.preventDefault();
-    }
-
     return (
-        <div className="profile">
+        <main className="profile">
             <h2 className="profile__title">Привет, {props.name}!</h2>
             <div className="profile__field">
                 <p className="profile__type">Имя</p>
@@ -19,6 +15,6 @@ export default function Profile (props) {
             </div>
             <button type="button" className="profile__button">Редактировать</button>
             <button type="button" className="profile__button profile__button_red">Выйти из аккаунта</button>
-        </div>
+        </main>
     )
 }

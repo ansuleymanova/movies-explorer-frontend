@@ -2,7 +2,7 @@ import './NotFound.css';
 
 export default function NotFound () {
     return (
-        <div className="not-found">
+        <main className="not-found">
             <h1 className="not-found__header">
                 404
             </h1>
@@ -10,6 +10,6 @@ export default function NotFound () {
                 Страница не найдена
             </p>
             <a href='/' className="not-found__back">Назад</a>
-        </div>
+        </main>
     )
 }

@@ -7,9 +7,9 @@ export default function SavedMovies (props) {
     const newCards = cards.filter(card => card.isSaved);
 
     return (
-        <div className="saved-movies">
+        <main className="saved-movies">
             <SearchForm />
             <MoviesCardList cards={newCards}/>
-        </div>
+        </main>
     )
 }

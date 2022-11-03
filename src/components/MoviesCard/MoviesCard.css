@@ -1,10 +1,9 @@
 .card {
-    background: #FDFDFD;
+    background: #fdfdfd;
+    box-sizing: border-box;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
     max-height: 271px;
-    width: 100%;
-    overflow: hidden;
-
+    min-width: 100%;
 }
 
 .card__heading {
@@ -42,11 +41,31 @@
     width: 30px;
 }
 
+.card__delete-button {
+    border: none;
+    background-color: #f9f9f9;
+    border-radius: 50%;
+    background-image: url("../../images/close.svg");
+    height:30px;
+    width: 30px;
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    transition: opacity .3s ease-in-out;
+}
+
+.card__delete-button:hover {
+    opacity: .8
+}
+
 .card__saved-icon_saved {
     background-image: url("../../images/saved.svg");
 }
 
 .card__image {
-    max-height: 100%;
-    max-width: 100%;
+    height: 203px;
+    width: 100%;
+    background-position: center;
+    object-fit: cover;
 }

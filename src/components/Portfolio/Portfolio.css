@@ -2,12 +2,22 @@
     width: 100%;
 }
 
+.portfolio__list {
+    list-style-type: none;
+    padding: 0;
+}
+
 .portfolio__heading {
     font-size: 18px;
     line-height: 1.1;
     font-weight: normal;
     color: #a0a0a0;
     margin: 0 0 30px;
+}
+
+.portfolio__item {
+    border-bottom: 1px solid #e8e8e8;
+
 }
 
 .portfolio_link {
@@ -53,7 +63,7 @@
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 450px) {
     .portfolio__heading {
         font-size: 14px;
         margin-bottom: 23px;

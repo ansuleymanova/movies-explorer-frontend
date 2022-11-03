@@ -8,7 +8,7 @@ export default function Register (props) {
     }
 
     return (
-        <div className="register">
+        <main className="register">
             <a href="https://machinedynamo.nomoredomains.icu/" className="register__main-link">
                 <img alt="Movie Explorer logo" className="register__logo" src={logo} />
             </a>
@@ -34,6 +34,6 @@ export default function Register (props) {
                 <button type="submit" className="register__save-button">Зарегистрироваться</button>
             </form>
             <p className="register__caption">Уже зарегистрированы? <a className="register__link" href="/signin">Войти</a></p>
-        </div>
+        </main>
     )
 }

@@ -25,8 +25,8 @@ function App() {
                       <Route path='/profile' element={<Profile name="Анна" email="suleymanova@hse.ru"/>}/>
                       <Route path='/not-found' element={<NotFound />}/>
                   </Routes>
+                  <Footer />
               </div>
-              <Footer />
           </div>
       </BrowserRouter>
   );

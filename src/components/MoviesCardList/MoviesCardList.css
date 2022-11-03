@@ -5,7 +5,9 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    padding-top: 156px;
+    grid-auto-columns: 33.3%;
+    list-style-type: none;
+    padding: 156px 0 0;
 }
 
 @media screen and (max-width: 768px) {

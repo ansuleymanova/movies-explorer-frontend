@@ -1,21 +1,22 @@
 import './SearchForm.css';
 
-export default function SearchForm (props) {
+export default function SearchForm () {
     return (
         <section className="search-form">
-            <div className="search-form__search-area">
+            <form className="search-form__search-area">
                 <div className="search-form__input-area">
                     <div className="search-form__icon"></div>
-                    <input type="text" className="search-form__input" placeholder="Фильм"/>
+                    <input type="text" className="search-form__input" placeholder="Фильм" required/>
                     <button type="submit" className="search-form__button"/>
                 </div>
                 <div className="search-form__options">
-                    <button type="button" className="search-form__toggle">
-                        <div className="search-form__toggly-circle"></div>
-                    </button>
+                    <label className="search-form__toggle">
+                        <input type="checkbox" />
+                        <i></i>
+                    </label>
                     <p className="search-form__text">Короткометражки</p>
                 </div>
-            </div>
+            </form>
         </section>
     )
 }

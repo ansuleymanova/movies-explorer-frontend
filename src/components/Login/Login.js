@@ -8,7 +8,7 @@ export default function Login (props) {
     }
 
     return (
-        <div className="login">
+        <main className="login">
             <a href="https://machinedynamo.nomoredomains.icu/" className="login__main-link">
                 <img alt="Movie Explorer logo" className="login__logo" src={logo} />
             </a>
@@ -30,6 +30,6 @@ export default function Login (props) {
                 <button type="submit" className="login__save-button">Войти</button>
             </form>
             <p className="login__caption">Еще не зарегистрированы? <a className="login__link" href="/signup">Регистрация</a></p>
-        </div>
+        </main>
     )
 }
