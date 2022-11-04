@@ -36,8 +36,8 @@ export default function Header () {
             }
             {(location.pathname === '/' && width > 768)
                 && <div className="header__authorization">
-                    <button className="header__button" type="button">Регистрация</button>
-                    <button className="header__button header__button_colored" type="button">Войти</button>
+                    <button type="button" className="header__button">Регистрация</button>
+                    <button type="button" className="header__button header__button_colored">Войти</button>
                 </div>
             }
             {(width <= 768 && !isBurgerOpen) &&

@@ -8,13 +8,13 @@
     margin-bottom: 140px;
 }
 
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 900px) {
     .saved-movies {
         width: calc(100% - 60px);
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 500px) {
     .saved-movies {
         width: calc(100% - 20px);
     }

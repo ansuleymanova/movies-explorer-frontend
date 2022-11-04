@@ -118,6 +118,7 @@
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 3;
 }
 
 .burger-menu {
@@ -126,7 +127,7 @@
     flex-direction: column;
     align-items: center;
     position: fixed;
-    height: 100vh;
+    height: 100%;
     width: 100%;
     max-width: 520px;
     background-color: white;
@@ -175,6 +176,11 @@
     line-height: 22px;
     font-weight: 500;
     margin-bottom: 28px;
+    transition: opacity .3s ease-in-out;
+}
+
+.burger-menu__link:hover {
+    opacity: .8;
 }
 
 .burger-menu__link:active {

@@ -7,7 +7,7 @@ function createCard () {
         id: faker.random.numeric(2),
         title: faker.music.songName(),
         isSaved: faker.datatype.boolean(),
-        image: faker.image.unsplash.image(),
+        image: faker.image.unsplash.image(364),
         duration: "1ч 45м"
     }
 }

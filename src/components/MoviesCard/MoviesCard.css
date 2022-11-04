@@ -3,7 +3,7 @@
     box-sizing: border-box;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
     max-height: 271px;
-    min-width: 100%;
+    width: 100%;
 }
 
 .card__heading {
@@ -39,6 +39,8 @@
     background-image: url("../../images/not-saved.svg");
     height: 30px;
     width: 30px;
+    background-color: transparent;
+    border: none;
 }
 
 .card__delete-button {

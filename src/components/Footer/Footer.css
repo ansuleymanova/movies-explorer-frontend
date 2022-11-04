@@ -101,3 +101,9 @@
         color: #a0a0a0;
     }
 }
+
+@media screen and (min-width: 1281px) {
+    .footer {
+        width: 99vw;
+    }
+}

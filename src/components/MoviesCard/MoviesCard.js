@@ -14,7 +14,7 @@ export default function MoviesCard ({ card }) {
                 </div>
                 {location.pathname === '/saved-movies'
                     ? <button type="button" className="card__delete-button" />
-                    : <div className={saved}></div>
+                    : <button type="button" className={saved}></button>
                 }
 
             </div>
