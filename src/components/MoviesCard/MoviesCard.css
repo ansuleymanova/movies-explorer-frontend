@@ -1,0 +1,73 @@
+.card {
+    background: #fdfdfd;
+    box-sizing: border-box;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+    max-height: 271px;
+    width: 100%;
+}
+
+.card__heading {
+    padding: 14px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card__info {
+    width: 80%;
+}
+.card__title {
+    font-size: 15px;
+    line-height: 18.15px;
+    font-weight: 500;
+    margin: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.card__duration {
+    font-size: 11px;
+    line-height: 13px;
+    color: #a0a0a0;
+    margin: 9px 0 0;
+}
+
+.card__saved-icon {
+    background-image: url("../../images/not-saved.svg");
+    height: 30px;
+    width: 30px;
+    background-color: transparent;
+    border: none;
+}
+
+.card__delete-button {
+    border: none;
+    background-color: #f9f9f9;
+    border-radius: 50%;
+    background-image: url("../../images/close.svg");
+    height:30px;
+    width: 30px;
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    transition: opacity .3s ease-in-out;
+}
+
+.card__delete-button:hover {
+    opacity: .8
+}
+
+.card__saved-icon_saved {
+    background-image: url("../../images/saved.svg");
+}
+
+.card__image {
+    height: 203px;
+    width: 100%;
+    background-position: center;
+    object-fit: cover;
+}

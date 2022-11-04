@@ -1,0 +1,126 @@
+.about-project {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 110px 0;
+}
+
+.about-project__content {
+    width: 100%;
+    max-width: 1280px;
+    padding: 0 70px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-project__info {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 110px;
+}
+
+.about-project__column:first-child {
+    margin-right: 40px;
+}
+
+.about-project__heading {
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 1.2;
+    letter-spacing: -0.04em;
+}
+
+.about-project__text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 20px;
+}
+
+.about-project__progress {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 36px;
+    font-size: 14px;
+    line-height: 1.21;
+}
+
+.about-project__backend {
+    width: 20%;
+    background-color: #2be080;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-project__frontend {
+    width: 80%;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-project__backend_transparent {
+    background-color: transparent;
+    font-weight: 500;
+    color: #a0a0a0;
+}
+
+.about-project__frontend_transparent {
+    background-color: transparent;
+    font-weight: 500;
+    color: #a0a0a0;
+}
+
+@media screen and (max-width: 768px) {
+    .about-project__text {
+        font-size: 12px;
+        line-height: 18px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .about-project {
+        padding: 70px 0;
+    }
+    .about-project__content {
+        padding: 0 18px;
+    }
+
+    .about-project__info {
+        flex-direction: column;
+        margin-bottom: 60px;
+    }
+
+    .about-project__column {
+        padding-top: 40px;
+    }
+
+    .about-project__column:first-child {
+        margin-right: 0;
+    }
+
+    .about-project__heading {
+        font-size: 18px;
+    }
+
+    .about-project__text {
+        font-size: 11px;
+        line-height: 16px;
+    }
+
+    .about-project__progress {
+        font-size: 11px;
+        line-height: 13.3px;
+        height: 35px;
+    }
+
+    .about-project__backend {
+        width: 35%;
+    }
+}

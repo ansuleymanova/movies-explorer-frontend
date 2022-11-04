@@ -1,0 +1,123 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 396px;
+}
+
+.login__main-link {
+    width: 100%;
+    height: 38px;
+    cursor: pointer;
+}
+
+.login__logo {
+    height: 38px;
+    width: 38px;
+}
+
+.login__title {
+    color: #000;
+    margin: 40px auto;
+    width: 100%;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 29px;
+}
+
+.login__container {
+    width: 100%;
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.login__label {
+    color: #a0a0a0;
+    font-size: 10px;
+    line-height: 1.2;
+    padding-bottom: 5px;
+}
+
+.login__field {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 44px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.login__field:last-child {
+    margin-bottom: 0;
+}
+
+.login__input {
+    border: none;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.login__input:invalid {
+    color: #ee3465;
+}
+
+.login__save-button {
+    width: 100%;
+    height: 45px;
+    border: none;
+    background-color: #2be080;
+    border-radius: 3px;
+    color: #fff;
+    margin-top: 152px;
+}
+
+.login__caption {
+    color: #a0a0a0;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 16px;
+}
+
+.login__link {
+    color: #2be080;
+    line-height: 1.15;
+    font-size: 14px;
+    text-align: center;
+    padding: 0;
+    text-decoration: none;
+    transition: opacity .5s ease-out;
+    cursor: pointer;
+}
+
+.login__link:hover {
+    opacity: .6;
+}
+
+.login__placeholder {
+    height: 68px;
+}
+
+@media screen and (max-width: 500px) {
+    .login {
+        width: calc(100% - 60px);
+    }
+
+    .login__main-link {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .login__title {
+        text-align: center;
+    }
+}
