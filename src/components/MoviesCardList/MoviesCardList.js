@@ -7,7 +7,7 @@ export default function MoviesCardList (props) {
         <ul className="movie-list">
             {props.films.map((film) =>
                 <li key={film.id ? film.id : film._id}>
-                    <MoviesCard card={film}/>
+                    <MoviesCard card={film} handleCardDelete={props.handleCardDelete}/>
                 </li>
             )}
         </ul>

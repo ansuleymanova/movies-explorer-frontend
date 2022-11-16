@@ -31,6 +31,21 @@ export default function SavedMovies (props) {
         localStorage.setItem('isShortsSelected', (!isShortsSelected).toString());
     }
 
+    function handleCardDelete () {
+        const shorts = localStorage.getItem('isShortsSelected');
+        const query = localStorage.getItem('query');
+        if (shorts) {
+            setIsShortsSelected(shorts === 'true');
+        }
+        api.getSavedMovies().then((movies) => {
+            localStorage.setItem('savedMovies', JSON.stringify(movies))
+            handleSearch(query);
+        }).catch((err) => {
+            console.log(err);
+            setNoResults('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+        }).finally(() => props.setPreloader(false));
+    }
+
     useEffect(() => {
         props.setPreloader(true);
         const shorts = localStorage.getItem('isShortsSelected');
@@ -45,13 +60,13 @@ export default function SavedMovies (props) {
             console.log(err);
             setNoResults('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
         }).finally(() => props.setPreloader(false));
-    }, [])
+    }, [isShortsSelected, ])
 
     return (
         <main className="saved-movies">
             <SearchForm isShortsSelected={isShortsSelected} setIsShortsSelected={handleShorts} handleSearch={handleSearch}/>
             {films.length > 0
-                ? <MoviesCardList films={films}/>
+                ? <MoviesCardList films={films} handleCardDelete={handleCardDelete}/>
                 : <span>{noResults}</span>
             }
         </main>

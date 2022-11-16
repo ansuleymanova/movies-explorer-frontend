@@ -29,7 +29,6 @@ class Api {
     }
 
     authorize (email, password) {
-        console.log(email, password);
         return fetch(`${this.url}/signin`, {
             method: 'POST',
             headers: {
@@ -54,7 +53,6 @@ class Api {
     }
 
     updateSelf({name, email}) {
-        console.log(name, email);
         return fetch(`${this.url}/users/me`, {
             method: 'PATCH',
             headers: {
@@ -97,7 +95,6 @@ class Api {
     }
 
     deleteMovie(id) {
-        console.log(id);
         return fetch(`${this.url}/movies/${id}`, {
             method: 'DELETE',
             headers: {

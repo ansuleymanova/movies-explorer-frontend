@@ -3,7 +3,7 @@ import {useLocation} from "react-router-dom";
 import {api} from "../../utils/MainApi";
 import {useEffect, useState} from "react";
 
-export default function MoviesCard ({ card }) {
+export default function MoviesCard (props) {
     const location = useLocation();
     const [isSaved, setIsSaved] = useState(false);
     const [apiId, setApiId] = useState('');
@@ -13,32 +13,37 @@ export default function MoviesCard ({ card }) {
     function handleSave() {
         if (isSaved) {
             api.deleteMovie(apiId)
-                .then(() => {setIsSaved(false)}).catch((err) => console.log(err));
+                .then(() => {
+                    setIsSaved(false);
+                    props.handleCardDelete();
+                }).catch((err) => console.log(err));
         } else {
-            api.addMovie(card).then(() => setIsSaved(true)).catch((err) => console.log(err));
+            api.addMovie(props.card).then(() => setIsSaved(true)).catch((err) => console.log(err));
         }
     }
 
     useEffect(() => {
-        const search = movies.find((film) => film.nameEN === card.nameEN);
-        setIsSaved(!!search);
-        setApiId(search ? search._id : '');
+        if (movies.length !== 0) {
+            const search = movies.find((film) => film.nameEN === props.card.nameEN);
+            setIsSaved(!!search);
+            setApiId(search ? search._id : '');
+        }
     }, [])
 
     return (
         <div className="card">
             <div className="card__heading">
                 <div className="card__info">
-                    <h2 className="card__title">{card.nameRU}</h2>
-                    <p className="card__duration">{card.duration} мин.</p>
+                    <h2 className="card__title">{props.card.nameRU}</h2>
+                    <p className="card__duration">{props.card.duration} мин.</p>
                 </div>
                 {location.pathname === '/saved-movies'
-                    ? <button type="button" className="card__delete-button" />
+                    ? <button type="button" className="card__delete-button" onClick={handleSave}/>
                     : <button type="button" className={saved} onClick={handleSave}></button>
                 }
 
             </div>
-            <img alt={card.nameRU} className="card__image" src={card.image.url ? `https://api.nomoreparties.co/${card.image.url}` : card.image}/>
+            <img alt={props.card.nameRU} className="card__image" src={props.card.image.url ? `https://api.nomoreparties.co/${props.card.image.url}` : props.card.image}/>
         </div>
     )
 }
