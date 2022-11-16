@@ -53,6 +53,15 @@
     height: 44px;
     margin-bottom: 24px;
     border-bottom: 1px solid #e8e8e8;
+    position: relative;
+}
+
+.register__error {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    font-size: 11px;
+    color: #ee3465;
 }
 
 .register__field:last-child {
@@ -65,10 +74,6 @@
     line-height: 1.2;
 }
 
-.register__input:invalid {
-    color: #ee3465;
-}
-
 .register__save-button {
     width: 100%;
     height: 45px;
@@ -77,6 +82,16 @@
     border-radius: 3px;
     color: #fff;
     margin-top: 152px;
+    cursor: pointer;
+}
+.register__save-button:active {
+    background-color: #ffffff;
+    color: #2be080;
+    border: 1px solid #2be080;
+}
+
+.register__save-button:disabled {
+    background-color: #a0a0a0;
 }
 
 .register__caption {

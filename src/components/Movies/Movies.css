@@ -8,6 +8,10 @@
     margin-bottom: 140px;
 }
 
+.movies__no-results {
+    text-align: center;
+}
+
 @media screen and (max-width: 900px) {
     .movies {
         width: calc(100% - 60px);

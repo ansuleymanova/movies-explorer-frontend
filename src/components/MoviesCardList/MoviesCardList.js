@@ -5,9 +5,9 @@ export default function MoviesCardList (props) {
 
     return (
         <ul className="movie-list">
-            {props.cards.map((card) =>
-                <li>
-                    <MoviesCard key={card.id} card={card}/>
+            {props.films.map((film) =>
+                <li key={film.id ? film.id : film._id}>
+                    <MoviesCard card={film}/>
                 </li>
             )}
         </ul>

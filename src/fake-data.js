@@ -4,7 +4,7 @@ export const cards = [];
 
 function createCard () {
     return {
-        id: faker.random.numeric(2),
+        id: faker.random.numeric(3),
         title: faker.music.songName(),
         isSaved: faker.datatype.boolean(),
         image: faker.image.unsplash.image(364),
