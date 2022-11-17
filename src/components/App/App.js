@@ -14,11 +14,14 @@ import {useEffect, useState} from "react";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Preloader from "../Preloader/Preloader";
+import {moviesApi} from "../../utils/MoviesApi";
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('jwt'));
     const [currentUser, setCurrentUser] = useState({});
+    const [savedMovies, setSavedMovies] = useState([]);
     const [isPreloaderVisible, setIsPreloaderVisible] = useState(false);
+    const [noResults, setNoResults] = useState('');
     const navigate = useNavigate();
 
     function handleRegister(name, email, password) {
@@ -72,6 +75,32 @@ function App() {
         }).finally(() => setIsPreloaderVisible(false));
     }
 
+    function handleDelete (movie) {
+        const savedMovie = savedMovies.find((film) => movie.nameEN === film.nameEN);
+        let id;
+        if (savedMovie) {
+            id = savedMovie._id
+        } else {
+            id = movie.id
+        }
+        console.log(id);
+        api.deleteMovie(savedMovie._id).then(() => {
+            const updatedSavedMovies = savedMovies.filter((film) => film._id !== id);
+            localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
+            setSavedMovies(updatedSavedMovies);
+        }).catch((err) => console.log(err))
+    }
+
+    function handleAdd (movie) {
+        const isInSaved = savedMovies.find((film) => movie.nameEN === film.nameEN);
+        if (!isInSaved) {
+            api.addMovie(movie).then((movie) => {
+                setSavedMovies([movie, ...savedMovies]);
+                localStorage.setItem('savedMovies', JSON.stringify([movie, ...savedMovies]));
+            }).catch((err) => console.log(err))
+        }
+    }
+
     useEffect(() => {
         if (localStorage.getItem('jwt')) {
             api.getSelf().then((userInfo) => {
@@ -84,6 +113,28 @@ function App() {
         }
     }, [])
 
+    useEffect(() => {
+        setIsPreloaderVisible(true);
+        moviesApi.getFilms().then((movies) => {
+            localStorage.setItem('films', JSON.stringify(movies));
+        }).catch((err) => {
+            console.log(err);
+            setNoResults('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+        }).finally(() => setIsPreloaderVisible(false));
+        api.getSavedMovies().then((movies) => {
+            if (Array.isArray(movies)) {
+                localStorage.setItem('savedMovies', JSON.stringify(movies));
+                setSavedMovies(movies);
+            } else {
+                localStorage.setItem('savedMovies', JSON.stringify([]));
+                setSavedMovies([]);
+            }
+        }).catch((err) => {
+            console.log(err);
+            setNoResults('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+        }).finally(() => setIsPreloaderVisible(false));
+    }, [loggedIn])
+
   return (
           <CurrentUserContext.Provider value={currentUser}>
           <div className="page">
@@ -93,10 +144,10 @@ function App() {
                   <Routes>
                       <Route path='/' element={<Main />}/>
                       <Route path='/movies' element={<ProtectedRoute isLoggedIn={loggedIn}/>}>
-                          <Route path='/movies' element={<Movies setPreloader={setIsPreloaderVisible}/>} />
+                          <Route path='/movies' element={<Movies noResults={noResults} setNoResults={setNoResults} handleDelete={handleDelete} handleAdd={handleAdd} setPreloader={setIsPreloaderVisible}/>} />
                       </Route>
                       <Route path='/saved-movies' element={<ProtectedRoute isLoggedIn={loggedIn}/>}>
-                          <Route path='/saved-movies' element={<SavedMovies setPreloader={setIsPreloaderVisible}/>} />
+                          <Route path='/saved-movies' element={<SavedMovies savedMovies={savedMovies} noResults={noResults} setNoResults={setNoResults} handleDelete={handleDelete} handleAdd={handleAdd} setPreloader={setIsPreloaderVisible}/>} />
                       </Route>
                       <Route path='/signup' element={
                           <Register

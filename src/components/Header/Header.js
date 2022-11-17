@@ -51,8 +51,8 @@ export default function Header () {
                     </div>
                     <div className="burger-menu__menu">
                         <a href="/" className="burger-menu__link">Главная</a>
-                        <a href="/" className={location.pathname === '/movies' ? "burger-menu__link burger-menu__link_active" : "burger-menu__link"}>Фильмы</a>
-                        <a href="/" className={location.pathname === '/saved-movies' ? "burger-menu__link burger-menu__link_active" : "burger-menu__link"}>Сохранённые фильмы</a>
+                        <a href="/movies" className={location.pathname === '/movies' ? "burger-menu__link burger-menu__link_active" : "burger-menu__link"}>Фильмы</a>
+                        <a href="/saved-movies" className={location.pathname === '/saved-movies' ? "burger-menu__link burger-menu__link_active" : "burger-menu__link"}>Сохранённые фильмы</a>
                     </div>
                     <a href="/profile" className="burger-menu__profile-link" >Аккаунт</a>
                 </div>
