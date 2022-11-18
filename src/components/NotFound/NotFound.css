@@ -21,8 +21,8 @@
 }
 
 .not-found__back {
-    position: absolute;
-    bottom: 60px;
+    cursor: pointer;
+    margin-top: 184px;
     color: #2be080;
     text-decoration: none;
     font-size: 14px;

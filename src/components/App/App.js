@@ -1,5 +1,5 @@
 import './App.css';
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
@@ -15,6 +15,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Preloader from "../Preloader/Preloader";
 import {moviesApi} from "../../utils/MoviesApi";
+import ToolTip from "../ToolTip/ToolTip";
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('jwt'));
@@ -22,7 +23,12 @@ function App() {
     const [savedMovies, setSavedMovies] = useState([]);
     const [isPreloaderVisible, setIsPreloaderVisible] = useState(false);
     const [noResults, setNoResults] = useState('');
+    const [isToolTipVisible, setIsToolTipVisible] = useState(false);
     const navigate = useNavigate();
+
+    function closeToolTip () {
+        setIsToolTipVisible(false);
+    }
 
     function handleRegister(name, email, password) {
         if (!email || !password || !name) {
@@ -72,6 +78,7 @@ function App() {
         setIsPreloaderVisible(true);
         api.updateSelf({ name, email }).then((res) => {
             setCurrentUser(res);
+            setIsToolTipVisible(true);
         }).catch((err) => console.log(err)).finally(() => {
             setIsPreloaderVisible(false);
         }).finally(() => setIsPreloaderVisible(false));
@@ -89,7 +96,11 @@ function App() {
             const updatedSavedMovies = savedMovies.filter((film) => film._id !== id);
             localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
             setSavedMovies(updatedSavedMovies);
-        }).catch((err) => console.log(err))
+        }).catch((err) => {
+            if (err === 'Ошибка: 401') {handleLogout()}
+            console.log(err);
+            }
+        )
     }
 
     function handleAdd (movie) {
@@ -98,7 +109,10 @@ function App() {
             api.addMovie(movie).then((movie) => {
                 setSavedMovies([movie, ...savedMovies]);
                 localStorage.setItem('savedMovies', JSON.stringify([movie, ...savedMovies]));
-            }).catch((err) => console.log(err))
+            }).catch((err) => {
+                console.log(err);
+                if (err === 'Ошибка: 401') {handleLogout()}
+            })
         }
     }
 
@@ -108,7 +122,7 @@ function App() {
                 setLoggedIn(true);
                 setCurrentUser(userInfo);
             }).catch((err) => {
-                setLoggedIn(false)
+                if (err === 'Ошибка: 401') {handleLogout()}
                 console.log(err);
             })
         }
@@ -117,24 +131,28 @@ function App() {
     useEffect(() => {
         if (loggedIn) {
             setIsPreloaderVisible(true);
-            moviesApi.getFilms().then((movies) => {
-                localStorage.setItem('films', JSON.stringify(movies));
-            }).catch((err) => {
-                console.log(err);
-                setNoResults('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
-            }).finally(() => setIsPreloaderVisible(false));
-            api.getSavedMovies().then((movies) => {
+            if (localStorage.getItem('films') === null) {
+                moviesApi.getFilms().then((movies) => {
+                    localStorage.setItem('films', JSON.stringify(movies));
+                }).catch((err) => {
+                    console.log(err);
+                    setNoResults('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+                })
+            }
+            api.getSavedMovies()
+                .then((movies) => {
                 if (Array.isArray(movies)) {
                     localStorage.setItem('savedMovies', JSON.stringify(movies));
                     setSavedMovies(movies);
                 } else {
                     localStorage.setItem('savedMovies', JSON.stringify([]));
                     setSavedMovies([]);
-                }
-            }).catch((err) => {
-                console.log(err);
-                setNoResults('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
-            }).finally(() => setIsPreloaderVisible(false));
+                }})
+                .catch((err) => {
+                    if (err === 'Ошибка: 401') {handleLogout()}
+                    console.log(err);
+                    setNoResults('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')})
+                .finally(() => setIsPreloaderVisible(false));
         }
     }, [loggedIn])
 
@@ -144,6 +162,7 @@ function App() {
               <div className="App">
                   <Header loggedIn={loggedIn}/>
                   <Preloader isVisible={isPreloaderVisible}/>
+                  <ToolTip isVisible={isToolTipVisible} closeToolTip={closeToolTip}/>
                   <Routes>
                       <Route path='/' element={<Main />}/>
                       <Route path='/movies' element={<ProtectedRoute isLoggedIn={loggedIn}/>}>
@@ -153,11 +172,15 @@ function App() {
                           <Route path='/saved-movies' element={<SavedMovies savedMovies={savedMovies} noResults={noResults} setNoResults={setNoResults} handleDelete={handleDelete} handleAdd={handleAdd} setPreloader={setIsPreloaderVisible}/>} />
                       </Route>
                       <Route path='/signup' element={
-                          <Register
-                              handleRegister={handleRegister}/>}/>
+                          loggedIn
+                              ? <Navigate to='/' />
+                              : <Register handleRegister={handleRegister}/>}
+                      />
                       <Route path='/signin' element={
-                          <Login
-                              handleLogin={handleLogin}/>}/>
+                          loggedIn
+                              ? <Navigate to='/' />
+                              : <Login handleLogin={handleLogin}/>}
+                      />
                       <Route path='/profile' element={<ProtectedRoute isLoggedIn={loggedIn}/>}>
                           <Route path='/profile' element={
                               <Profile

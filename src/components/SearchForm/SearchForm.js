@@ -7,7 +7,6 @@ export default function SearchForm (props) {
     const {values, handleFieldChange, isValid, setIsValid } = ValidatedForm();
     const [error, setError] = useState('');
     const location = useLocation();
-    const [isShortsSelected, setIsShortsSelected] = useState(false);
 
     function handleSubmit (e) {
         e.preventDefault();
@@ -23,13 +22,15 @@ export default function SearchForm (props) {
 
     useEffect(() => {
         if (location.pathname === '/movies') {
-            const query = localStorage.getItem('query');
-            if (query) {
-                values.query = query;
-                setIsValid(true);
-            } else {
-                setIsValid(false);
-                setError('Должно быть, вы забыли ввести запрос');
+            if (localStorage.getItem('query') !== null) {
+                const query = localStorage.getItem('query');
+                if (query) {
+                    values.query = query;
+                    setIsValid(true);
+                } else {
+                    setIsValid(false);
+                    setError('Должно быть, вы забыли ввести запрос');
+                }
             }
         }
     }, [location.pathname])

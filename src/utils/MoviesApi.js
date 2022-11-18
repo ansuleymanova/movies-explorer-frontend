@@ -11,7 +11,6 @@ class MoviesApi {
         return fetch('https://api.nomoreparties.co/beatfilm-movies', {
             headers: {"Content-type": "application/json"}})
             .then((res) => this._getResponseData(res))
-            .catch((err) => console.log(err))
     }
 }
 

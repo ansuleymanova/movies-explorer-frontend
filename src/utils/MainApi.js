@@ -25,7 +25,6 @@ class Api {
             .then((res) => {
                 return res;
             })
-            .catch((err) => console.log(err));
     }
 
     authorize (email, password) {
@@ -42,14 +41,12 @@ class Api {
                     localStorage.setItem('jwt', data.token);
                     return data;
                 }})
-            .catch((err) => console.log(err))
     }
 
     getSelf() {
         return fetch(`${this.url}/users/me`, {
             headers: this._headers,})
             .then((res) => this._getResponseData(res))
-            .catch((err) => console.log(err))
     }
 
     updateSelf({name, email}) {
@@ -91,7 +88,7 @@ class Api {
                 nameRU: data.nameRU,
                 nameEN: data.nameEN,
             }),
-        }).then(res => this._getResponseData(res)).catch((err) => console.log(err));
+        }).then(res => this._getResponseData(res))
     }
 
     deleteMovie(id) {

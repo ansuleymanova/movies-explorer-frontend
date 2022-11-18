@@ -48,7 +48,9 @@ export default function Movies (props) {
             <SearchForm isShortsSelected={isShortsSelected} setIsShortsSelected={handleShorts} handleSearch={handleSearch}/>
             {movies.length > 0
                 ? <MoviesCardList films={movies} handleAdd={props.handleAdd} handleDelete={props.handleDelete}/>
-                : <span className="movies__no-results">Ничего не нашлось :(</span>
+                : localStorage.getItem('query') !== null
+                    ? <span className="movies__no-results">Ничего не нашлось :(</span>
+                    : ''
             }
         </main>
     )
