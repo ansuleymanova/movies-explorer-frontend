@@ -1,0 +1,35 @@
+.toolTip {
+    position: absolute;
+    display: none;
+    background-color: #fff;
+    padding: 5px;
+    bottom: 50px;
+    right: 50px;
+    width: 150px;
+    height: 70px;
+}
+
+.toolTip_open {
+    display: flex;
+    flex-direction: column;
+}
+
+.toolTip__text {
+    margin: 0 0 5px;
+    padding: 0;
+}
+
+.toolTip__button {
+    width: 100%;
+    border: none;
+    background-color: #2be080;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.toolTip__button:active {
+    background-color: #fff;
+    border: 1px solid #2be080;
+    color: #2be080;
+}

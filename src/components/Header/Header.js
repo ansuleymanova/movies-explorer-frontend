@@ -1,9 +1,10 @@
 import './Header.css';
 import logo from '../../images/logo.svg';
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 
-export default function Header () {
+export default function Header (props) {
+    const navigate = useNavigate();
     const location = useLocation();
     const [width, setWidth] = useState(window.innerWidth);
     const [isBurgerOpen, setIsBurgerOpen] = useState(false);
@@ -24,20 +25,20 @@ export default function Header () {
             <a href="/" className="header__link">
                 <img alt="Movie Explorer logo" className="header__logo" src={logo} />
             </a>
-            {(['/movies', '/saved-movies', '/profile'].includes(location.pathname) && width > 768)
+            {(['/movies', '/saved-movies', '/profile', "/"].includes(location.pathname) && width > 768 && props.loggedIn)
                 &&
                 <div className="header__content">
                     <div className="header__navigation">
-                        <a href="/movies" className="header__link">Фильмы</a>
-                        <a href="/saved-movies" className="header__link">Сохранённые фильмы</a>
+                        <a href="/movies" className={location.pathname === '/movies' ? 'header__link_active header__link' : 'header__link'}>Фильмы</a>
+                        <a href="/saved-movies" className={location.pathname === '/saved-movies' ? 'header__link_active header__link' : 'header__link'}>Сохранённые фильмы</a>
                     </div>
                     <a href="/profile" className="header__profile-link" >Аккаунт</a>
                 </div>
             }
-            {(location.pathname === '/' && width > 768)
-                && <div className="header__authorization">
-                    <button type="button" className="header__button">Регистрация</button>
-                    <button type="button" className="header__button header__button_colored">Войти</button>
+            {(location.pathname === '/' && width > 768 && !props.loggedIn) &&
+                <div className="header__authorization">
+                    <button type="button" className="header__button" onClick={() => navigate('/signup')}>Регистрация</button>
+                    <button type="button" className="header__button header__button_colored" onClick={() => navigate('/signin')}>Войти</button>
                 </div>
             }
             {(width <= 768 && !isBurgerOpen) &&
@@ -50,8 +51,8 @@ export default function Header () {
                     </div>
                     <div className="burger-menu__menu">
                         <a href="/" className="burger-menu__link">Главная</a>
-                        <a href="/" className="burger-menu__link">Фильмы</a>
-                        <a href="/" className="burger-menu__link">Сохранённые фильмы</a>
+                        <a href="/movies" className={location.pathname === '/movies' ? "burger-menu__link burger-menu__link_active" : "burger-menu__link"}>Фильмы</a>
+                        <a href="/saved-movies" className={location.pathname === '/saved-movies' ? "burger-menu__link burger-menu__link_active" : "burger-menu__link"}>Сохранённые фильмы</a>
                     </div>
                     <a href="/profile" className="burger-menu__profile-link" >Аккаунт</a>
                 </div>

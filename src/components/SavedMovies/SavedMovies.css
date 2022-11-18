@@ -8,6 +8,10 @@
     margin-bottom: 140px;
 }
 
+.saved-movies__no-results {
+    text-align: center;
+}
+
 @media screen and (max-width: 900px) {
     .saved-movies {
         width: calc(100% - 60px);
