@@ -7,24 +7,17 @@ export default function MoviesCard (props) {
     const [isSaved, setIsSaved] = useState(false);
     const saved = isSaved ? 'card__saved-icon card__saved-icon_saved' : 'card__saved-icon';
 
-    async function handleDelete () {
-        const deleted = await props.handleDelete(props.card);
-        if (deleted) {
-            setIsSaved(false);
-        }
+    function handleDelete () {
+        props.handleDelete(props.card);
+        setIsSaved(false);
     }
 
-    async function handleSwitch () {
+    function handleSwitch () {
         if (isSaved) {
-            const deleted = await props.handleDelete(props.card);
-            if (deleted) {
-                setIsSaved(false);
-            }
+            handleDelete()
         } else {
-            const added = await props.handleAdd(props.card);
-            if (added) {
-                setIsSaved(true);
-            }
+            props.handleAdd(props.card);
+            setIsSaved(true);
         }
     }
 

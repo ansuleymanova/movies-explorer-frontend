@@ -89,7 +89,6 @@ function App() {
             const updatedSavedMovies = savedMovies.filter((film) => film._id !== id);
             localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
             setSavedMovies(updatedSavedMovies);
-            return true;
         }).catch((err) => console.log(err))
     }
 
@@ -99,7 +98,6 @@ function App() {
             api.addMovie(movie).then((movie) => {
                 setSavedMovies([movie, ...savedMovies]);
                 localStorage.setItem('savedMovies', JSON.stringify([movie, ...savedMovies]));
-                return true;
             }).catch((err) => console.log(err))
         }
     }
