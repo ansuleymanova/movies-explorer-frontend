@@ -3,16 +3,18 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import {useEffect, useState} from "react";
 import { api } from "../../utils/MainApi";
-import {filterByQuery, selectShortMovies} from "../../utils/Filters";
+import {filterByQuery, selectShortMovies} from "../../utils/filters";
 
 export default function SavedMovies (props) {
     const [savedMovies, setSavedMovies] = useState([]);
+    const [query, setQuery] = useState('');
     const [isShortsSelected, setIsShortsSelected] = useState(false);
 
     function handleSearch (query) {
         props.setPreloader(true);
-        localStorage.setItem('query', query);
+        setQuery(query);
         api.getSavedMovies().then((movies) => {
+            console.log(movies);
             const films = isShortsSelected ? selectShortMovies(movies) : movies;
             setSavedMovies(filterByQuery(films, query));
         }).catch((err) => console.log(err)).finally(() => props.setPreloader(false))
@@ -20,15 +22,19 @@ export default function SavedMovies (props) {
 
     function handleShorts() {
         setIsShortsSelected(!isShortsSelected);
-        localStorage.setItem('isShortsSelected', (!isShortsSelected).toString());
     }
 
     useEffect(() => {
-        setIsShortsSelected(localStorage.getItem('isShortsSelected') === 'true');
-        if (isShortsSelected) {
-            setSavedMovies(selectShortMovies(props.savedMovies));
+        let movies;
+        if (query) {
+            movies = filterByQuery(props.savedMovies, query)
         } else {
-            setSavedMovies(props.savedMovies);
+            movies = props.savedMovies;
+        }
+        if (isShortsSelected) {
+            setSavedMovies(selectShortMovies(movies));
+        } else {
+            setSavedMovies(movies);
         }
     }, [isShortsSelected, props.savedMovies])
 
@@ -37,7 +43,7 @@ export default function SavedMovies (props) {
             <SearchForm isShortsSelected={isShortsSelected} setIsShortsSelected={handleShorts} handleSearch={handleSearch}/>
             {savedMovies.length > 0
                 ? <MoviesCardList films={savedMovies} handleDelete={props.handleDelete}/>
-                : <span>{props.noResults}</span>
+                : <span>Ничего не нашлось :(</span>
             }
         </main>
     )

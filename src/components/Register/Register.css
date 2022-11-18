@@ -84,6 +84,7 @@
     margin-top: 152px;
     cursor: pointer;
 }
+
 .register__save-button:active {
     background-color: #ffffff;
     color: #2be080;

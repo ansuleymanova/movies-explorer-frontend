@@ -1,15 +1,20 @@
 import './SearchForm.css';
 import {useEffect, useState} from "react";
 import ValidatedForm from "../../utils/Validators";
+import {useLocation} from "react-router-dom";
 
 export default function SearchForm (props) {
     const {values, handleFieldChange, isValid, setIsValid } = ValidatedForm();
     const [error, setError] = useState('');
+    const location = useLocation();
+    const [isShortsSelected, setIsShortsSelected] = useState(false);
 
     function handleSubmit (e) {
         e.preventDefault();
         isValid ? props.handleSearch(values.query) : setError('Должно быть, вы забыли ввести запрос');
-        localStorage.setItem('query', values.query);
+        if (location.pathname === '/movies') {
+            localStorage.setItem('query', values.query);
+        }
     }
 
     useEffect(() => {
@@ -17,15 +22,17 @@ export default function SearchForm (props) {
     }, [isValid])
 
     useEffect(() => {
-        const query = localStorage.getItem('query');
-        if (query) {
-            values.query = query;
-            setIsValid(true);
-        } else {
-            setIsValid(false);
-            setError('Должно быть, вы забыли ввести запрос');
+        if (location.pathname === '/movies') {
+            const query = localStorage.getItem('query');
+            if (query) {
+                values.query = query;
+                setIsValid(true);
+            } else {
+                setIsValid(false);
+                setError('Должно быть, вы забыли ввести запрос');
+            }
         }
-    }, [])
+    }, [location.pathname])
 
     return (
         <section className="search-form">

@@ -30,7 +30,9 @@ function App() {
         }
         setIsPreloaderVisible(true);
         api.register(name, email, password).then((res) => {
-            navigate('/signin');
+            if (res._id) {
+                handleLogin(email, password);
+            }
         }).catch((err) => {
             console.log(err);
         }).finally(() => {
@@ -83,11 +85,11 @@ function App() {
         } else {
             id = movie.id
         }
-        console.log(id);
         api.deleteMovie(savedMovie._id).then(() => {
             const updatedSavedMovies = savedMovies.filter((film) => film._id !== id);
             localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
             setSavedMovies(updatedSavedMovies);
+            return true;
         }).catch((err) => console.log(err))
     }
 
@@ -97,6 +99,7 @@ function App() {
             api.addMovie(movie).then((movie) => {
                 setSavedMovies([movie, ...savedMovies]);
                 localStorage.setItem('savedMovies', JSON.stringify([movie, ...savedMovies]));
+                return true;
             }).catch((err) => console.log(err))
         }
     }
@@ -114,32 +117,34 @@ function App() {
     }, [])
 
     useEffect(() => {
-        setIsPreloaderVisible(true);
-        moviesApi.getFilms().then((movies) => {
-            localStorage.setItem('films', JSON.stringify(movies));
-        }).catch((err) => {
-            console.log(err);
-            setNoResults('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
-        }).finally(() => setIsPreloaderVisible(false));
-        api.getSavedMovies().then((movies) => {
-            if (Array.isArray(movies)) {
-                localStorage.setItem('savedMovies', JSON.stringify(movies));
-                setSavedMovies(movies);
-            } else {
-                localStorage.setItem('savedMovies', JSON.stringify([]));
-                setSavedMovies([]);
-            }
-        }).catch((err) => {
-            console.log(err);
-            setNoResults('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
-        }).finally(() => setIsPreloaderVisible(false));
+        if (loggedIn) {
+            setIsPreloaderVisible(true);
+            moviesApi.getFilms().then((movies) => {
+                localStorage.setItem('films', JSON.stringify(movies));
+            }).catch((err) => {
+                console.log(err);
+                setNoResults('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+            }).finally(() => setIsPreloaderVisible(false));
+            api.getSavedMovies().then((movies) => {
+                if (Array.isArray(movies)) {
+                    localStorage.setItem('savedMovies', JSON.stringify(movies));
+                    setSavedMovies(movies);
+                } else {
+                    localStorage.setItem('savedMovies', JSON.stringify([]));
+                    setSavedMovies([]);
+                }
+            }).catch((err) => {
+                console.log(err);
+                setNoResults('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+            }).finally(() => setIsPreloaderVisible(false));
+        }
     }, [loggedIn])
 
   return (
           <CurrentUserContext.Provider value={currentUser}>
           <div className="page">
               <div className="App">
-                  <Header/>
+                  <Header loggedIn={loggedIn}/>
                   <Preloader isVisible={isPreloaderVisible}/>
                   <Routes>
                       <Route path='/' element={<Main />}/>

@@ -3,7 +3,7 @@ import logo from '../../images/logo.svg';
 import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 
-export default function Header () {
+export default function Header (props) {
     const navigate = useNavigate();
     const location = useLocation();
     const [width, setWidth] = useState(window.innerWidth);
@@ -25,7 +25,7 @@ export default function Header () {
             <a href="/" className="header__link">
                 <img alt="Movie Explorer logo" className="header__logo" src={logo} />
             </a>
-            {(['/movies', '/saved-movies', '/profile'].includes(location.pathname) && width > 768)
+            {(['/movies', '/saved-movies', '/profile', "/"].includes(location.pathname) && width > 768 && props.loggedIn)
                 &&
                 <div className="header__content">
                     <div className="header__navigation">
@@ -35,8 +35,8 @@ export default function Header () {
                     <a href="/profile" className="header__profile-link" >Аккаунт</a>
                 </div>
             }
-            {(location.pathname === '/' && width > 768)
-                && <div className="header__authorization">
+            {(location.pathname === '/' && width > 768 && !props.loggedIn) &&
+                <div className="header__authorization">
                     <button type="button" className="header__button" onClick={() => navigate('/signup')}>Регистрация</button>
                     <button type="button" className="header__button header__button_colored" onClick={() => navigate('/signin')}>Войти</button>
                 </div>

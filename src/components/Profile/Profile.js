@@ -9,7 +9,9 @@ export default function Profile (props) {
 
     function handleSubmit (e) {
         e.preventDefault();
-        props.handleUpdateUser({name: values.name, email: values.email});
+        if (values.name !== user.name || values.email !== user.email) {
+            props.handleUpdateUser({name: values.name, email: values.email});
+        }
     }
 
     useEffect(() => {
@@ -47,7 +49,7 @@ export default function Profile (props) {
                 />
                 <span className="profile__error profile__error-email">{errors.email || ''}</span>
             </label>
-            <button type="submit" disabled={!isValid} className="profile__button">Редактировать</button>
+            <button type="submit" disabled={!isValid || (values.name === user.name && values.email === user.email)} className="profile__button">Редактировать</button>
             <button type="button" className="profile__button profile__button_red" onClick={props.handleLogout}>Выйти из аккаунта</button>
         </form>
     )

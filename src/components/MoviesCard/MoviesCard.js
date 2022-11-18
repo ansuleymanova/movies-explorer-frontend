@@ -7,18 +7,24 @@ export default function MoviesCard (props) {
     const [isSaved, setIsSaved] = useState(false);
     const saved = isSaved ? 'card__saved-icon card__saved-icon_saved' : 'card__saved-icon';
 
-    function handleDelete () {
-        props.handleDelete(props.card);
-        setIsSaved(false);
+    async function handleDelete () {
+        const deleted = await props.handleDelete(props.card);
+        if (deleted) {
+            setIsSaved(false);
+        }
     }
 
-    function handleSwitch () {
+    async function handleSwitch () {
         if (isSaved) {
-            props.handleDelete(props.card);
-            setIsSaved(false);
+            const deleted = await props.handleDelete(props.card);
+            if (deleted) {
+                setIsSaved(false);
+            }
         } else {
-            props.handleAdd(props.card);
-            setIsSaved(true);
+            const added = await props.handleAdd(props.card);
+            if (added) {
+                setIsSaved(true);
+            }
         }
     }
 
@@ -45,7 +51,9 @@ export default function MoviesCard (props) {
                 }
 
             </div>
-            <img alt={props.card.nameRU} className="card__image" src={props.card.image.url ? `https://api.nomoreparties.co/${props.card.image.url}` : props.card.image}/>
+            <a href={props.card.trailerLink} target="_blank" rel="noreferrer">
+                <img alt={props.card.nameRU} className="card__image" src={props.card.image.url ? `https://api.nomoreparties.co/${props.card.image.url}` : props.card.image}/>
+            </a>
         </div>
     )
 }

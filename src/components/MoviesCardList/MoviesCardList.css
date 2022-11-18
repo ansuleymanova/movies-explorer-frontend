@@ -9,6 +9,24 @@
     padding: 156px 0 0;
 }
 
+.movie-list__more-button {
+    width: 100%;
+    max-width: 396px;
+    height: 45px;
+    background-color: #2be080;
+    border-radius: 6px;
+    border: none;
+    color: #fff;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.movie-list__more-button:active {
+    background-color: #ffffff;
+    color: #2be080;
+    border: 1px solid #2be080;
+}
+
 @media screen and (max-width: 900px) {
     .movie-list {
         grid-template-columns: repeat(2, minmax(0, 1fr));

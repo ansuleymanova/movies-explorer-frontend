@@ -66,6 +66,10 @@
     transition: opacity .3s ease-in-out;
 }
 
+.profile__button:disabled {
+    cursor: initial;
+}
+
 .profile__button:hover {
     opacity: .8;
 }
